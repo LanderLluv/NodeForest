@@ -30,7 +30,7 @@ interface BinarySearchTree<Int> {
      * @return <code>true</code> si el valor está contenido en el árbol (incluyendo
      *         los árboles hijo). <code>false</code> en caso contrario.
      */
-    fun contains(value: Int): Int
+    fun contains(value: Int): Boolean
 
     /**
      * Inserta el valor recibido (<code>value</code>) en el árbol.
