@@ -1,32 +1,31 @@
 package com.nodeforest
 
-class Node<Int>(_value: Int, _leftChild: Node<Int>?, _rightChild: Node<Int>?) {
+class Node<T : Comparable<T>>(_value: T, _leftChild: Node<T>?, _rightChild: Node<T>?) {
     private var value = _value
     private var leftChild = _leftChild
     private var rightChild = _rightChild
 
-
-    fun getValue(): Int {
+    fun getValue(): T {
         return value
     }
 
-    fun setValue(_value: Int){
+    fun setValue(_value: T){
         value = _value
     }
 
-    fun getLeftChild(): Node<Int>?{
+    fun getLeftChild(): Node<T>?{
         return leftChild
     }
 
-    fun setLeftChild(_leftChild: Node<Int>?){
+    fun setLeftChild(_leftChild: Node<T>?){
         leftChild = _leftChild
     }
 
-    fun getRightChild(): Node<Int>?{
+    fun getRightChild(): Node<T>?{
         return rightChild
     }
 
-    fun setRightChild(_rightChild: Node<Int>?){
+    fun setRightChild(_rightChild: Node<T>?){
         rightChild = _rightChild
     }
 }

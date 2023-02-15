@@ -1,29 +1,30 @@
 package com.nodeforest
 
-class BinarySearchTreeImpl<Int> : BinarySearchTree<Int> {
-    private var root: Node<Int>?
+class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
+    private var root: Node<T>?
     init {
         root = null
     }
 
-    override fun getRootValue(): Int {
+    override fun getRootValue(): T {
         return root!!.getValue()
     }
 
     //TODO:no funciona si no se pasan a String, no deja ni hacer compareTo con los Int ni usar operador <
 
-    override fun contains(value: Int): Boolean {
-        var aux: Node<Int>? = root
+    override fun contains(value: T): Boolean {
+
+        var aux: Node<T>? = root
         while(aux != null){
             if(aux.getValue() == value){
                 return true
-            }else if(aux.getLeftChild() == null && aux.getRightChild() == null){
+            }else if(aux.getLeftChild() == null && aux.getRightChild() == null) {
                 //Hemos llegado a la hoja
                 return false
-            }else if(value.toString().compareTo(aux.getValue().toString()) == 1 && aux.getRightChild() != null){
+            }else if(value.compareTo(aux.getValue()) == 1 && aux.getRightChild() != null){
                 //El valor es mayor y tenemos nodo a la derecha
                 aux = aux.getRightChild()
-            }else if(value.toString().compareTo(aux.getValue().toString()) == -1 && aux.getLeftChild() != null) {
+            }else if(value.compareTo(aux.getValue()) == -1 && aux.getLeftChild() != null) {
                 //El valor es menor y tenemos nodo a la izquierda
                 aux = aux.getLeftChild()
             }else{
@@ -34,11 +35,11 @@ class BinarySearchTreeImpl<Int> : BinarySearchTree<Int> {
         return false
     }
 
-    override fun insert(value: Int) {
+    override fun insert(value: T) {
         TODO("Not yet implemented")
     }
 
-    override fun remove(value: Int) {
+    override fun remove(value: T) {
         TODO("Not yet implemented")
     }
 
@@ -46,8 +47,8 @@ class BinarySearchTreeImpl<Int> : BinarySearchTree<Int> {
         return root?.getLeftChild() != null
     }
 
-    override fun getLeftChild(): BinarySearchTreeImpl<Int> {
-        val leftChild = BinarySearchTreeImpl<Int>()
+    override fun getLeftChild(): BinarySearchTreeImpl<T> {
+        val leftChild = BinarySearchTreeImpl<T>()
 
         if(hasLeftChild()){
             leftChild.root!!.setValue(root!!.getLeftChild()!!.getValue())
@@ -62,8 +63,8 @@ class BinarySearchTreeImpl<Int> : BinarySearchTree<Int> {
         return root?.getRightChild() != null
     }
 
-    override fun getRightChild(): BinarySearchTreeImpl<Int> {
-        val rightChild = BinarySearchTreeImpl<Int>()
+    override fun getRightChild(): BinarySearchTreeImpl<T> {
+        val rightChild = BinarySearchTreeImpl<T>()
 
         if(hasRightChild()){
             rightChild.root!!.setValue(root!!.getRightChild()!!.getValue())

@@ -13,14 +13,14 @@ package com.nodeforest
  *
  * @param <T> tipo de los valores contenidos en el árbol.
  */
-interface BinarySearchTree<Int> {
+interface BinarySearchTree<T : Comparable<T>> {
 
     /**
      * Devuelve el valor raíz del árbol.
      *
      * @return el valor raíz del árbol.
      */
-    fun getRootValue(): Int
+    fun getRootValue(): T
 
     /**
      * Comprueba si el valor recibido (<code>value</code>) está en el árbol. Puede
@@ -30,21 +30,21 @@ interface BinarySearchTree<Int> {
      * @return <code>true</code> si el valor está contenido en el árbol (incluyendo
      *         los árboles hijo). <code>false</code> en caso contrario.
      */
-    fun contains(value: Int): Boolean
+    fun contains(value: T): Boolean
 
     /**
      * Inserta el valor recibido (<code>value</code>) en el árbol.
      *
      * @param value el valor a insertar en el árbol.
      */
-    fun insert(value: Int)
+    fun insert(value: T)
 
     /**
      * Elimina una instancia del valor recibido (<code>value</code>) en el árbol.
      *
      * @param value el valor a elimiinar en el árbol.
      */
-    fun remove(value: Int)
+    fun remove(value: T)
 
     /**
      * Comprueba si el árbol tiene un hijo izquierdo.
@@ -60,7 +60,7 @@ interface BinarySearchTree<Int> {
      *
      * @return el subárbol del hijo izquierdo.
      */
-    fun getLeftChild(): BinarySearchTree<Int>
+    fun getLeftChild(): BinarySearchTree<T>
 
     /**
      * Comprueba si el árbol tiene un hijo derecho.
@@ -77,7 +77,7 @@ interface BinarySearchTree<Int> {
      * @return el subárbol del hijo derecho.
      * @throws EmptyTreeException si el árbol es vacío.
      */
-    fun getRightChild(): BinarySearchTree<Int>
+    fun getRightChild(): BinarySearchTree<T>
 
     /**
      * Elimina el valor y los árboles hijos del árbol actual, convirtiéndolo en un
