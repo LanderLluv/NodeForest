@@ -68,8 +68,8 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
 
         if(hasRightChild()){
             rightChild.root!!.setValue(root!!.getRightChild()!!.getValue())
-            rightChild.root!!.setLeftChild(root!!.getRightChild()?.getLeftChild())
-            rightChild.root!!.setRightChild(root!!.getRightChild()?.getRightChild())
+            rightChild.root!!.setLeftChild(root!!.getRightChild()!!.getLeftChild())
+            rightChild.root!!.setRightChild(root!!.getRightChild()!!.getRightChild())
         }
 
         return rightChild
@@ -86,7 +86,4 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
 }
 
 fun main(args: Array<String>) {
-    var num = "2"
-    var num2 = "1"
-    println(num.compareTo(num2) == -1)
 }

@@ -1,9 +1,15 @@
 package com.nodeforest
 
 class Node<T : Comparable<T>>(_value: T, _leftChild: Node<T>?, _rightChild: Node<T>?) {
-    private var value = _value
-    private var leftChild = _leftChild
-    private var rightChild = _rightChild
+
+    private var value: T
+    private var leftChild: Node<T>?
+    private var rightChild: Node<T>?
+    init{
+        value = _value
+        leftChild = _leftChild
+        rightChild = _rightChild
+    }
 
     fun getValue(): T {
         return value
@@ -38,6 +44,8 @@ fun main(args: Array<String>){
     println(prueba3.getValue().toString())
     println(prueba3.getLeftChild()?.getValue().toString())
     println(prueba3.getRightChild()?.getValue().toString())
+    println(prueba1.getLeftChild() == null)
+    println(prueba2.getRightChild() == null)
 
 
 }
