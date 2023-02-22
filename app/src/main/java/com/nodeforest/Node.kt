@@ -35,17 +35,3 @@ class Node<T : Comparable<T>>(_value: T, _leftChild: Node<T>?, _rightChild: Node
         rightChild = _rightChild
     }
 }
-
-fun main(args: Array<String>){
-    val prueba1 = Node(3,null,null)
-    val prueba2 = Node(6,null,null)
-    val prueba3 = Node(5,prueba1,prueba2)
-
-    println(prueba3.getValue().toString())
-    println(prueba3.getLeftChild()?.getValue().toString())
-    println(prueba3.getRightChild()?.getValue().toString())
-    println(prueba1.getLeftChild() == null)
-    println(prueba2.getRightChild() == null)
-
-
-}
