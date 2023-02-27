@@ -20,7 +20,7 @@ interface BinarySearchTree<T : Comparable<T>> {
      *
      * @return el valor raíz del árbol.
      */
-    fun getRootValue(): T
+    fun getRootValue(): T?
 
     /**
      * Comprueba si el valor recibido (<code>value</code>) está en el árbol. Puede

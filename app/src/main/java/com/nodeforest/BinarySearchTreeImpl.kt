@@ -6,11 +6,9 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         root = null
     }
 
-    override fun getRootValue(): T {
-        return root!!.getValue()
+    override fun getRootValue(): T? {
+        return root?.getValue()
     }
-
-    //TODO:no funciona si no se pasan a String, no deja ni hacer compareTo con los Int ni usar operador <
 
     override fun contains(value: T): Boolean {
 
@@ -36,11 +34,54 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
     }
 
     override fun insert(value: T) {
-        TODO("Not yet implemented")
+        val toInsert = Node(value, null, null)
+        if(root == null){
+            root = toInsert
+        }else{
+            var aux = root
+            while(aux != null){
+                //Hemos llegado a la hoja
+                if(aux.getLeftChild() == null && aux.getRightChild() == null){
+                    if(value > aux.getValue()){
+                        //Derecha
+                        aux.setRightChild(toInsert)
+                        aux = null
+                    }else{
+                        //Izquierda
+                        aux.setLeftChild(toInsert)
+                        aux = null
+                    }
+                //No tiene hijo derecho y es mayor
+                }else if(value > aux.getValue() && aux.getRightChild() == null){
+                    aux.setRightChild(toInsert)
+                    aux = null
+                //No tiene hijo izquierdo y es menor
+                }else if(value < aux.getValue() && aux.getLeftChild() == null){
+                    aux.setLeftChild(toInsert)
+                    aux = null
+                }else{
+                    //Pasamos al siguiente nodo
+                    if(value > aux.getValue()){
+                        aux = aux.getRightChild()
+                    }else{
+                        aux = aux.getLeftChild()
+                    }
+                }
+            }
+        }
     }
 
     override fun remove(value: T) {
-        TODO("Not yet implemented")
+        /*var aux = root
+
+        while(aux != null){
+            if(aux.getValue() == value){
+                var toRemove = aux;
+                if(aux.getRightChild() != null){
+
+                }
+            }
+        }*/
     }
 
     override fun hasLeftChild(): Boolean {
@@ -83,7 +124,4 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         return root == null
     }
 
-}
-
-fun main(args: Array<String>) {
 }
