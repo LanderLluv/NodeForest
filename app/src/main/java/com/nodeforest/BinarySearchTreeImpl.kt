@@ -42,7 +42,7 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
             while(aux != null){
                 //Hemos llegado a la hoja
                 if(aux.getLeftChild() == null && aux.getRightChild() == null){
-                    if(value > aux.getValue()){
+                    if(value.compareTo(aux.getValue()) == 1){
                         //Derecha
                         aux.setRightChild(toInsert)
                         aux = null
@@ -52,16 +52,16 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
                         aux = null
                     }
                 //No tiene hijo derecho y es mayor
-                }else if(value > aux.getValue() && aux.getRightChild() == null){
+                }else if(value.compareTo(aux.getValue()) == 1 && aux.getRightChild() == null){
                     aux.setRightChild(toInsert)
                     aux = null
                 //No tiene hijo izquierdo y es menor
-                }else if(value < aux.getValue() && aux.getLeftChild() == null){
+                }else if(value.compareTo(aux.getValue()) == -1 && aux.getLeftChild() == null){
                     aux.setLeftChild(toInsert)
                     aux = null
                 }else{
                     //Pasamos al siguiente nodo
-                    if(value > aux.getValue()){
+                    if(value.compareTo(aux.getValue()) == 1){
                         aux = aux.getRightChild()
                     }else{
                         aux = aux.getLeftChild()
