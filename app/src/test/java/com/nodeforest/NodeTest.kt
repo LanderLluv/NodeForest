@@ -82,9 +82,9 @@ class NodeTest {
 
     @Test
     fun setRightChildValue() {
-        val numright = 4
+        val numRight = 4
         val numRoot = 6
-        val rightChild = Node(numright,null,null)
+        val rightChild = Node(numRight,null,null)
         val root = Node(numRoot, null,rightChild)
         val newRightChild = Node(numRoot, null, null)
         root.setRightChild(newRightChild)
