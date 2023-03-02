@@ -6,6 +6,10 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         root = null
     }
 
+    fun getRoot(): Node<T>?{
+        return root
+    }
+
     override fun getRootValue(): T? {
         return root?.getValue()
     }
@@ -42,7 +46,7 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
             while(aux != null){
                 //Hemos llegado a la hoja
                 if(aux.getLeftChild() == null && aux.getRightChild() == null){
-                    if(value.compareTo(aux.getValue()) == 1){
+                    if(value.compareTo(aux.getValue()) == 1 || value.compareTo(aux.getValue()) == 0){
                         //Derecha
                         aux.setRightChild(toInsert)
                         aux = null
@@ -72,16 +76,42 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
     }
 
     override fun remove(value: T) {
-        /*var aux = root
+        root = removeNode(root, value)
+    }
 
-        while(aux != null){
-            if(aux.getValue() == value){
-                var toRemove = aux;
-                if(aux.getRightChild() != null){
+    private fun removeNode(root: Node<T>?, value: T): Node<T>? {
+        var aux = root
 
-                }
+        if(aux == null){
+            return aux
+        }
+
+        if(aux.getValue().compareTo(value) == 1){
+            aux.setLeftChild(removeNode(aux.getLeftChild(),value))
+        }else if(aux.getValue().compareTo(value) == -1){
+            aux.setRightChild(removeNode(aux.getRightChild(),value))
+        }else{
+            if(aux.getLeftChild() == null && aux.getRightChild() == null){
+                aux = null
+            }else if(aux.getRightChild() == null){
+                aux = aux.getLeftChild()
+            }else if(aux.getLeftChild() == null){
+                aux = aux.getRightChild()
+            }else{
+                val temp = findMinFromRight(aux.getRightChild()!!)
+                aux.setValue(temp.getValue())
+                aux.setRightChild(removeNode(aux.getRightChild(),temp.getValue()))
             }
-        }*/
+        }
+        return aux
+    }
+
+    private fun findMinFromRight(node: Node<T>): Node<T> {
+        var nodeAux = node
+        while(nodeAux.getLeftChild() != null){
+            nodeAux = nodeAux.getLeftChild()!!
+        }
+        return nodeAux
     }
 
     override fun hasLeftChild(): Boolean {
@@ -92,9 +122,13 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         val leftChild = BinarySearchTreeImpl<T>()
 
         if(hasLeftChild()){
-            leftChild.root!!.setValue(root!!.getLeftChild()!!.getValue())
-            leftChild.root!!.setLeftChild(root!!.getLeftChild()?.getLeftChild())
-            leftChild.root!!.setRightChild(root!!.getLeftChild()?.getRightChild())
+            leftChild.insert(root!!.getLeftChild()!!.getValue())
+            if(root!!.getLeftChild()!!.getLeftChild() != null){
+                leftChild.insert(root!!.getLeftChild()!!.getLeftChild()!!.getValue())
+            }
+            if(root!!.getLeftChild()!!.getRightChild() != null){
+                leftChild.insert(root!!.getLeftChild()!!.getRightChild()!!.getValue())
+            }
         }
 
         return leftChild
@@ -108,9 +142,13 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         val rightChild = BinarySearchTreeImpl<T>()
 
         if(hasRightChild()){
-            rightChild.root!!.setValue(root!!.getRightChild()!!.getValue())
-            rightChild.root!!.setLeftChild(root!!.getRightChild()!!.getLeftChild())
-            rightChild.root!!.setRightChild(root!!.getRightChild()!!.getRightChild())
+            rightChild.insert(root!!.getRightChild()!!.getValue())
+            if(root!!.getRightChild()!!.getLeftChild() != null){
+                rightChild.insert(root!!.getRightChild()!!.getLeftChild()!!.getValue())
+            }
+            if(root!!.getRightChild()!!.getRightChild() != null){
+                rightChild.insert(root!!.getRightChild()!!.getRightChild()!!.getValue())
+            }
         }
 
         return rightChild
@@ -122,6 +160,22 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
 
     override fun isEmpty(): Boolean {
         return root == null
+    }
+
+    fun isSameTree(compareTree: BinarySearchTreeImpl<T>?): Boolean{
+        val actualNode = this.getRoot()
+        val compareNode = compareTree?.getRoot()
+        //Ambos nodos son nulos
+        if(actualNode == null && compareNode == null){
+            return true
+        }
+        //Uno de los nodos es nulo y el otro no, o sus valores no coinciden
+        if(actualNode == null || compareNode == null || (actualNode.getValue() != compareNode.getValue())){
+            return false
+        }
+
+        //Llamada recursiva a los hijos izquierdo y derecho de ambos arboles
+        return this.getLeftChild().isSameTree(compareTree.getLeftChild()) && this.getRightChild().isSameTree(compareTree.getRightChild())
     }
 
 }
