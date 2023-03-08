@@ -12,7 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // creating a variable for tree view.
         val treeView = findViewById<TreeView>(R.id.idTreeView)
 
         // creating adapter class for our treeview
@@ -34,29 +33,16 @@ class MainActivity : AppCompatActivity() {
         // below line is setting adapter for our tree.
         treeView.setAdapter(adapter)
 
-        // below tree node is a parent node of our
-        // tree node which is Geeks for Geeks.
         val root = TreeNode("Root")
 
-        // below node is the first child node of
-        // our root node ie Geeks for Geeks.
         val firstChild = TreeNode("FirstChild")
-
-        // below node is the second child of our
-        // root node ie Geeks for Geeks.
         val secondChild = TreeNode("SecondChild")
 
-        // below node is the first child of our DSA node.
         val first1Child = TreeNode("first1")
-
-        // below node is the second child of our DSA node.
         val first2Child = TreeNode("first2")
 
-        // below node is the first child of our Algorithm node.
         val second1Child = TreeNode("second1")
 
-        // below lines is used for adding
-        // child nodes to our root nodes.
         root.addChild(firstChild)
         root.addChild(secondChild)
 
@@ -64,9 +50,6 @@ class MainActivity : AppCompatActivity() {
         firstChild.addChild(first2Child)
         secondChild.addChild(second1Child)
 
-        // below line is for setting our root node.
-        // Inside our root node we are passing
-        // "root" as our root node.
         adapter.setRootNode(root)
     }
 }
