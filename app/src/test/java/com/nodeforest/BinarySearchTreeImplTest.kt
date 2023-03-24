@@ -55,7 +55,7 @@ class BinarySearchTreeImplTest {
         val empty = BinarySearchTreeImpl<Int>()
         empty.insert(3)
         empty.insert(1)
-        assertEquals(1,empty.getLeftChild().getRootValue())
+        assertEquals(1,empty.getLeftChild()?.getRootValue())
 
     }
 
@@ -79,7 +79,7 @@ class BinarySearchTreeImplTest {
     @Test
     fun removeLeaf(){
         bst.remove(3)
-        assertEquals(null, bst.getLeftChild().getRootValue())
+        assertEquals(null, bst.getLeftChild()?.getRootValue())
     }
 
     @Test
@@ -87,7 +87,7 @@ class BinarySearchTreeImplTest {
         //Añadimos el 1, hijo izquierdo del nodo 3
         bst.insert(1)
         bst.remove(3)
-        assertEquals(1,bst.getLeftChild().getRootValue())
+        assertEquals(1,bst.getLeftChild()?.getRootValue())
     }
 
     @Test
@@ -114,7 +114,7 @@ class BinarySearchTreeImplTest {
 
     @Test
     fun hasLeftChildFalse() {
-        assertEquals(false, bst.getLeftChild().hasLeftChild())
+        assertEquals(false, bst.getLeftChild()?.hasLeftChild())
     }
 
     @Test
@@ -125,7 +125,7 @@ class BinarySearchTreeImplTest {
         bstLeftChild.insert(3)
         bstLeftChild.insert(1)
         bstLeftChild.insert(4)
-        assertEquals(true, bst.getLeftChild().isSameTree(bstLeftChild))
+        assertEquals(true, bst.getLeftChild()?.isSameTree(bstLeftChild))
 
     }
 
@@ -137,7 +137,7 @@ class BinarySearchTreeImplTest {
         bstLeftChild.insert(1)
         bstLeftChild.insert(4)
         bstLeftChild.insert(3)
-        assertEquals(false, bst.getLeftChild().isSameTree(bstLeftChild))
+        assertEquals(false, bst.getLeftChild()?.isSameTree(bstLeftChild))
 
     }
 

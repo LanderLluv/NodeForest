@@ -115,43 +115,59 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
     }
 
     override fun hasLeftChild(): Boolean {
-        return root?.getLeftChild() != null
+        return root?.getLeftChild()?.getValue() != null
     }
 
-    override fun getLeftChild(): BinarySearchTreeImpl<T> {
+    /*override fun getLeftChild(): BinarySearchTreeImpl<T>? {
         val leftChild = BinarySearchTreeImpl<T>()
 
         if(hasLeftChild()){
             leftChild.insert(root!!.getLeftChild()!!.getValue())
-            if(root!!.getLeftChild()!!.getLeftChild() != null){
+            if(root!!.getLeftChild()!!.getLeftChild()?.getValue() != null){
                 leftChild.insert(root!!.getLeftChild()!!.getLeftChild()!!.getValue())
             }
-            if(root!!.getLeftChild()!!.getRightChild() != null){
+            if(root!!.getLeftChild()!!.getRightChild()?.getValue() != null){
                 leftChild.insert(root!!.getLeftChild()!!.getRightChild()!!.getValue())
             }
         }
 
         return leftChild
+    }*/
+
+    override fun getLeftChild(): BinarySearchTreeImpl<T>? {
+        val leftChild = BinarySearchTreeImpl<T>()
+        leftChild.root = getLeftChildNode(root)
+
+        return leftChild
+    }
+
+    private fun getLeftChildNode(node: Node<T>?): Node<T>?{
+        if(node == null || node.getLeftChild() == null){
+            return null
+        }
+        return Node<T>(node.getLeftChild()!!.getValue(),
+        getLeftChildNode(node.getLeftChild()), getRightChildNode(node.getLeftChild()))
+
     }
 
     override fun hasRightChild(): Boolean {
-        return root?.getRightChild() != null
+        return root?.getRightChild()?.getValue() != null
     }
 
     override fun getRightChild(): BinarySearchTreeImpl<T> {
         val rightChild = BinarySearchTreeImpl<T>()
-
-        if(hasRightChild()){
-            rightChild.insert(root!!.getRightChild()!!.getValue())
-            if(root!!.getRightChild()!!.getLeftChild() != null){
-                rightChild.insert(root!!.getRightChild()!!.getLeftChild()!!.getValue())
-            }
-            if(root!!.getRightChild()!!.getRightChild() != null){
-                rightChild.insert(root!!.getRightChild()!!.getRightChild()!!.getValue())
-            }
-        }
+        rightChild.root = getRightChildNode(root)
 
         return rightChild
+    }
+
+    private fun getRightChildNode(node: Node<T>?): Node<T>?{
+        if(node == null || node.getRightChild() == null){
+            return null
+        }
+        return Node<T>(node.getRightChild()!!.getValue(),
+            getLeftChildNode(node.getRightChild()), getRightChildNode(node.getRightChild()))
+
     }
 
     override fun clear() {
@@ -175,7 +191,7 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         }
 
         //Llamada recursiva a los hijos izquierdo y derecho de ambos arboles
-        return this.getLeftChild().isSameTree(compareTree.getLeftChild()) && this.getRightChild().isSameTree(compareTree.getRightChild())
+        return this.getLeftChild()!!.isSameTree(compareTree.getLeftChild()) && this.getRightChild().isSameTree(compareTree.getRightChild())
     }
 
 }

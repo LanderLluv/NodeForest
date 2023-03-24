@@ -60,7 +60,7 @@ interface BinarySearchTree<T : Comparable<T>> {
      *
      * @return el subárbol del hijo izquierdo.
      */
-    fun getLeftChild(): BinarySearchTree<T>
+    fun getLeftChild(): BinarySearchTreeImpl<T>?
 
     /**
      * Comprueba si el árbol tiene un hijo derecho.
