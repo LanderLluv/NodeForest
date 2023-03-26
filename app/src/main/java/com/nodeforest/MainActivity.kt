@@ -55,12 +55,11 @@ class MainActivity : AppCompatActivity() {
         btnAdd.setOnClickListener{
             addValue(bstree, adapter)
         }
+
         val btnDelete: Button = findViewById(R.id.btnDelete)
-
-
-
-
-
+        btnDelete.setOnClickListener{
+            deleteValue(bstree, adapter)
+        }
     }
 
     private fun addValue(bstree: BinarySearchTreeImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
@@ -86,6 +85,37 @@ class MainActivity : AppCompatActivity() {
         })
         addDialog.create()
         addDialog.show()
+    }
+
+    private fun deleteValue(bstree: BinarySearchTreeImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
+        val deleteDialog = AlertDialog.Builder(this)
+        deleteDialog.setTitle("Elimina un elemento:")
+        deleteDialog.setMessage("Elemento a eliminar:")
+
+        val inputNumber = EditText(this)
+        inputNumber.inputType = InputType.TYPE_CLASS_NUMBER
+        deleteDialog.setView(inputNumber)
+
+        deleteDialog.setPositiveButton("Ok", DialogInterface.OnClickListener(){
+                dialog, i ->
+            val inputNumberValue = Integer.parseInt(inputNumber.text.toString())
+            if(bstree.contains(inputNumberValue)){
+                if(inputNumberValue in 0..99){
+                    bstree.remove(inputNumberValue)
+                    val treeArray = treeToArray(bstree)
+                    if(treeArray.size > 0) {
+                        showTree(treeArray, adapter)
+                    }
+                }else{
+                    Toast.makeText(this, "El valor debe estar entre 0 y 99", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(this, "El valor no se encuentra en el arbol", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        deleteDialog.create()
+        deleteDialog.show()
     }
 
     private fun showTree(result: ArrayList<TreeNode?>, adapter: BaseTreeAdapter<ViewHolder?>){
