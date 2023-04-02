@@ -9,6 +9,11 @@ class BinarySearchTreeImplTest {
 
     private lateinit var bst: BinarySearchTreeImpl<Int>
 
+    /*
+        5
+       / \
+      3   7
+     */
     @Before
     fun setUp() {
         bst = BinarySearchTreeImpl<Int>()
@@ -117,6 +122,9 @@ class BinarySearchTreeImplTest {
         assertEquals(false, bst.getLeftChild()?.hasLeftChild())
     }
 
+    /*
+    Creamos un arbol igual al subarbol izquierdo del original
+     */
     @Test
     fun getLeftChildTrue() {
         bst.insert(1)
@@ -129,6 +137,9 @@ class BinarySearchTreeImplTest {
 
     }
 
+    /*
+    Creamos un arbol distinto al subarbol izquierdo del original
+     */
     @Test
     fun getLeftChildFalse() {
         bst.insert(1)
@@ -152,6 +163,9 @@ class BinarySearchTreeImplTest {
         assertEquals(false, bst.getRightChild().hasRightChild())
     }
 
+    /*
+    Creamos un arbol igual al subarbol derecho del original
+     */
     @Test
     fun getRightChildTrue() {
         bst.insert(6)
@@ -163,6 +177,9 @@ class BinarySearchTreeImplTest {
         assertEquals(true, bst.getRightChild().isSameTree(bstRightChild))
     }
 
+    /*
+    Creamos un arbol distinto al subarbol derecho del original
+     */
     @Test
     fun getRightChildFalse() {
         bst.insert(6)

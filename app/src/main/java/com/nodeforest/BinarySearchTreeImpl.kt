@@ -79,6 +79,9 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         root = removeNode(root, value)
     }
 
+    /*
+    Eliminada el nodo con el valor value, llamada de forma recursiva
+     */
     private fun removeNode(root: Node<T>?, value: T): Node<T>? {
         var aux = root
 
@@ -86,18 +89,25 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
             return aux
         }
 
+
         if(aux.getValue().compareTo(value) == 1){
+            //En caso de que coincida el valor
             aux.setLeftChild(removeNode(aux.getLeftChild(),value))
         }else if(aux.getValue().compareTo(value) == -1){
+            //En caso de que el el nodo actual sea menor que el valor que buscamos
             aux.setRightChild(removeNode(aux.getRightChild(),value))
         }else{
             if(aux.getLeftChild() == null && aux.getRightChild() == null){
+                //No tiene hijos
                 aux = null
             }else if(aux.getRightChild() == null){
+                //No tiene hijo derecho
                 aux = aux.getLeftChild()
             }else if(aux.getLeftChild() == null){
+                //No tiene hijo derecho
                 aux = aux.getRightChild()
             }else{
+                //Tiene dos hijos y debemos encontrar el menor valor del subarbol de la derecha
                 val temp = findMinFromRight(aux.getRightChild()!!)
                 aux.setValue(temp.getValue())
                 aux.setRightChild(removeNode(aux.getRightChild(),temp.getValue()))
@@ -106,6 +116,9 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         return aux
     }
 
+    /*
+    Devuelve el menor valor de un subarbol derecho
+     */
     private fun findMinFromRight(node: Node<T>): Node<T> {
         var nodeAux = node
         while(nodeAux.getLeftChild() != null){
@@ -118,29 +131,15 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         return root?.getLeftChild()?.getValue() != null
     }
 
-    /*override fun getLeftChild(): BinarySearchTreeImpl<T>? {
-        val leftChild = BinarySearchTreeImpl<T>()
-
-        if(hasLeftChild()){
-            leftChild.insert(root!!.getLeftChild()!!.getValue())
-            if(root!!.getLeftChild()!!.getLeftChild()?.getValue() != null){
-                leftChild.insert(root!!.getLeftChild()!!.getLeftChild()!!.getValue())
-            }
-            if(root!!.getLeftChild()!!.getRightChild()?.getValue() != null){
-                leftChild.insert(root!!.getLeftChild()!!.getRightChild()!!.getValue())
-            }
-        }
-
-        return leftChild
-    }*/
-
     override fun getLeftChild(): BinarySearchTreeImpl<T>? {
         val leftChild = BinarySearchTreeImpl<T>()
         leftChild.root = getLeftChildNode(root)
-
         return leftChild
     }
 
+    /*
+    Recursion para obtener el nodo del hijo izquierdo
+     */
     private fun getLeftChildNode(node: Node<T>?): Node<T>?{
         if(node == null || node.getLeftChild() == null){
             return null
@@ -161,6 +160,9 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         return rightChild
     }
 
+    /*
+    Recursion para obtener el nodo del hijo derecho
+     */
     private fun getRightChildNode(node: Node<T>?): Node<T>?{
         if(node == null || node.getRightChild() == null){
             return null
@@ -178,6 +180,9 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         return root == null
     }
 
+    /*
+    Compara el arbol actual y el que se pasa por parametro para ver si son iguales
+     */
     fun isSameTree(compareTree: BinarySearchTreeImpl<T>?): Boolean{
         val actualNode = this.getRoot()
         val compareNode = compareTree?.getRoot()

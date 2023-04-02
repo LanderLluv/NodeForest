@@ -20,36 +20,21 @@ class MainActivity : AppCompatActivity() {
 
         val treeView = findViewById<TreeView>(R.id.idTreeViewMain)
 
-        // creating adapter class for our treeview
-        // using basetree adapter. Inside base tree adapter
-        // you have to pass viewholder class along with
-        // context and your layout file for treeview node.
+        //Adaptador necesario para el treeview
         val adapter: BaseTreeAdapter<ViewHolder?> = object : BaseTreeAdapter<ViewHolder?>(this, R.layout.tree_view_node) {
             override fun onCreateViewHolder(view: View?): ViewHolder {
                 return ViewHolder(view)
             }
 
             override fun onBindViewHolder(viewHolder: ViewHolder?, data: Any?, position: Int) {
-                // inside our on bind view holder method we
-                // are setting data from object to text view.
                 viewHolder!!.textView.setText(data.toString())
             }
         }
 
-        // below line is setting adapter for our tree.
+        //Enlazamos el adaptador con el treeview
         treeView.setAdapter(adapter)
 
         val bstree = BinarySearchTreeImpl<Int>()
-        /*bstree.insert(10)
-        bstree.insert(3)
-        bstree.insert(12)
-        bstree.insert(1)
-        bstree.insert(8)
-        bstree.insert(11)*/
-
-        /*val result = treeToArray(prueba)
-        println(result)
-        showTree(result, adapter)*/
 
         val btnAdd: Button = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener{
@@ -62,6 +47,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*
+        Se llama cuando se pulsa el boton de añadir.
+        Muestra un dialogo para poder introducir un valor al arbol, que se añadira en caso de ser
+        un valor valido (0-99), o se rechazara en caso de no serlo.
+     */
     private fun addValue(bstree: BinarySearchTreeImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
         val addDialog = AlertDialog.Builder(this)
         addDialog.setTitle("Añade un elemento:")
@@ -87,6 +77,11 @@ class MainActivity : AppCompatActivity() {
         addDialog.show()
     }
 
+    /*
+        Se llama cuando se pulsa el boton de eliminar.
+        Muestra un dialogo para poder introducir un valor al arbol, que se borrara en caso de ser
+        un valor valido (0-99) y estar presente en el arbol, o se rechazara en caso de no serlo.
+     */
     private fun deleteValue(bstree: BinarySearchTreeImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
         val deleteDialog = AlertDialog.Builder(this)
         deleteDialog.setTitle("Elimina un elemento:")
@@ -118,10 +113,12 @@ class MainActivity : AppCompatActivity() {
         deleteDialog.show()
     }
 
+    /*
+        Representa el arbol correspondiente dado un array
+     */
     private fun showTree(result: ArrayList<TreeNode?>, adapter: BaseTreeAdapter<ViewHolder?>){
         adapter.setRootNode(result[0]!!)
         var index = 0
-        //val nullNode = TreeNode("null")
         while(index < result.size/2){
             if(result[2*index+1] == null && result[2*index+2] == null){
                 index++
@@ -132,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             if(result[2*index+1] != null){
                 result[index]!!.addChild(result[2*index+1])
             }else{
+                //Nulo
                 result[index]!!.addChild(TreeNode("N"))
             }
 
@@ -139,17 +137,18 @@ class MainActivity : AppCompatActivity() {
             if(result[2*index+2] != null){
                 result[index]!!.addChild(result[2*index+2])
             }else{
+                //Nulo
                 result[index]!!.addChild(TreeNode("N"))
             }
             index++
         }
     }
 
+    /*
+        Transforma un arbol en un array para poder representarlo graficamente
+     */
     private fun treeToArray(root: BinarySearchTreeImpl<Int>?): ArrayList<TreeNode?> {
         val result = ArrayList<TreeNode?>()
-        /*if (root?.isEmpty() == true){
-            return result
-        }*/
 
         val queue = mutableListOf<BinarySearchTreeImpl<Int>>()
         queue.add(root!!)
@@ -158,16 +157,18 @@ class MainActivity : AppCompatActivity() {
         while (index < queue.size) {
             val node = queue[index]
             index++
+            //Primer elemento(raiz)
             if(result.isEmpty()){
-
                 result.add(TreeNode(node.getRootValue()))
             }
 
-
+            //Nodo completamente nulo
             if(node.getRoot() == null && node.getLeftChild()?.getRoot() == null && node.getRightChild().getRoot() == null){
                 continue
             }
+
             if (node.getLeftChild()?.getRoot() != null) {
+                //Hijo izquierdo
                 queue.add(node.getLeftChild()!!)
                 result.add(TreeNode(node.getLeftChild()!!.getRootValue()))
             } else {
@@ -175,6 +176,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (node.getRightChild().getRoot() != null) {
+                //Hijo derecho
                 queue.add(node.getRightChild())
                 result.add(TreeNode(node.getRightChild().getRootValue()))
             } else {
