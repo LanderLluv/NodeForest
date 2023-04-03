@@ -73,6 +73,9 @@ class MainActivity : AppCompatActivity() {
                     }
 
         })
+        addDialog.setNegativeButton("Cancelar", DialogInterface.OnClickListener(){
+            dialog, i ->
+        })
         addDialog.create()
         addDialog.show()
     }
@@ -107,6 +110,9 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this, "El valor no se encuentra en el arbol", Toast.LENGTH_SHORT).show()
             }
+        })
+        deleteDialog.setNegativeButton("Cancelar", DialogInterface.OnClickListener(){
+                dialog, i ->
         })
 
         deleteDialog.create()
