@@ -13,10 +13,10 @@ import de.blox.treeview.BaseTreeAdapter
 import de.blox.treeview.TreeNode
 import de.blox.treeview.TreeView
 
-class MainActivity : AppCompatActivity() {
+class BinarySearchTreeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_bstree)
 
         val treeView = findViewById<TreeView>(R.id.idTreeViewMain)
 
