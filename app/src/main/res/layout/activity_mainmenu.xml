@@ -5,49 +5,47 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvBSTree"
+        android:id="@+id/tvNodeForest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="NODEFOREST"
+        android:textSize="75px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.136" />
+
+    <TextView
+        android:id="@+id/tvChooseType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elige el tipo de dato que quieres visualizar:"
+        android:textSize="48px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29" />
+
+    <Button
+        android:id="@+id/btnBSTree"
+        android:layout_width="225dp"
+        android:layout_height="55dp"
         android:text="Arbol Binario Busqueda"
-        android:textSize="60px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-    <de.blox.treeview.TreeView
-        android:id="@+id/idTreeViewMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="125px"
-        app:lineThickness="1dp"
-        app:levelSeparation="12dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
+        android:id="@+id/btnHeap"
+        android:layout_width="225dp"
+        android:layout_height="55dp"
+        android:text="Heap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-
+        app:layout_constraintVertical_bias="0.632" />
 </androidx.constraintlayout.widget.ConstraintLayout>
