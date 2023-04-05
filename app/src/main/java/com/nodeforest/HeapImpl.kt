@@ -1,5 +1,7 @@
 package com.nodeforest
 
+import java.util.Collections
+
 class HeapImpl<T: Comparable<T>> : Heap<T> {
 
     private var size: Int
@@ -19,7 +21,7 @@ class HeapImpl<T: Comparable<T>> : Heap<T> {
         if(isEmpty()){
             return null
         }else{
-            return array[1]
+            return array[0]
         }
 
     }
@@ -28,54 +30,59 @@ class HeapImpl<T: Comparable<T>> : Heap<T> {
         if(isEmpty()){
            return null
         }else{
-            val value = this.getMaxValue()
-            array[1] = array[size]
-            array[size--] = null
-            sink(1)
+            Collections.swap(array, 0, size-1)
+            val value = array.removeAt(size-1)
+            size--
+            checkDown(0)
             return value
         }
     }
 
-    private fun sink(hollow: Int){
-        var hollowCopy = hollow
-        val valueInHollow = array[hollowCopy]
-
-        var child = hollowCopy*2
-        var end = false
-
-        while(child <= size && !end){
-            val childValue = array[child]
-            val nextChildValue = array[child+1]
-
-            if(child < size && nextChildValue!!.compareTo(childValue!!) > 0){
-                child++
+    private fun checkDown(index: Int){
+        var parent = index
+        var candidate = Int.MAX_VALUE
+        while(true){
+            val leftChildIndex = parent*2+1
+            val rightChildIndex = parent*2+2
+            candidate = parent
+            if(leftChildIndex < size && array[leftChildIndex]!!.compareTo(array[candidate]!!) > 0){
+                candidate = leftChildIndex
             }
-            if(childValue!!.compareTo(valueInHollow!!) > 0){
-                array[hollowCopy] = childValue
-                hollowCopy = child
-                child = hollowCopy*2
-            }else{
-                end = true
+
+            if(rightChildIndex < size && array[rightChildIndex]!!.compareTo(array[candidate]!!) > 0){
+                candidate = rightChildIndex
             }
+
+            if(candidate == parent){
+                return
+            }
+
+            Collections.swap(array, parent, candidate)
+            parent = candidate
+
         }
-        array[hollowCopy] = valueInHollow
     }
 
     override fun clear() {
-        for(i in array.indices){
-            array[i] = null
-        }
+        array.clear()
         size = 0
     }
 
-    override fun add(value: T) {
-        var hollow = ++size
-        val parentValue = array[hollow/2]
+    override fun insert(value: T) {
+        array.add(value)
+        size++
+        checkUp(size-1)
 
-        while(hollow > 0 && parentValue!!.compareTo(value) < 0){
-            array[hollow] = parentValue
-            hollow /= 2
+    }
+
+    private fun checkUp(index: Int){
+        var child = index
+        var parent = (child-1)/2
+
+        while(child > 0 && array[child]!!.compareTo(array[parent]!!) >  0){
+            Collections.swap(array, child, parent)
+            child = parent
+            parent = (child-1)/2
         }
-        array[hollow] = value
     }
 }

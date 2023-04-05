@@ -44,7 +44,7 @@ interface Heap <T : Comparable<T>>  {
      *
      * @param value el elemento a añadir.
      */
-    fun add(value: T)
+    fun insert(value: T)
 
     /**
      * Elimina los valores del heap, convirtiéndolo en un heap vacío.
