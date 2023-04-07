@@ -13,6 +13,9 @@ class HeapImpl<T: Comparable<T>> : Heap<T> {
     }
 
 
+    fun getArray(): ArrayList<T?>{
+        return array
+    }
     override fun isEmpty(): Boolean {
         return size == 0
     }

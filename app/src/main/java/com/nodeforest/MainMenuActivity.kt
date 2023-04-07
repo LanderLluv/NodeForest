@@ -17,5 +17,8 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         val btnHeap: Button = findViewById(R.id.btnHeap)
+        btnHeap.setOnClickListener{
+            startActivity(Intent(this, HeapActivity::class.java))
+        }
     }
 }
