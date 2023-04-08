@@ -153,10 +153,9 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         return root?.getRightChild()?.getValue() != null
     }
 
-    override fun getRightChild(): BinarySearchTreeImpl<T> {
+    override fun getRightChild(): BinarySearchTreeImpl<T>? {
         val rightChild = BinarySearchTreeImpl<T>()
         rightChild.root = getRightChildNode(root)
-
         return rightChild
     }
 
@@ -196,7 +195,7 @@ class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
         }
 
         //Llamada recursiva a los hijos izquierdo y derecho de ambos arboles
-        return this.getLeftChild()!!.isSameTree(compareTree.getLeftChild()) && this.getRightChild().isSameTree(compareTree.getRightChild())
+        return this.getLeftChild()!!.isSameTree(compareTree.getLeftChild()) && this.getRightChild()!!.isSameTree(compareTree.getRightChild())
     }
 
 }

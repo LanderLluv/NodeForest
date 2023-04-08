@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import de.blox.treeview.BaseTreeAdapter
 import de.blox.treeview.TreeNode
 import de.blox.treeview.TreeView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BinarySearchTreeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,41 +157,35 @@ class BinarySearchTreeActivity : AppCompatActivity() {
      */
     private fun treeToArray(root: BinarySearchTreeImpl<Int>?): ArrayList<TreeNode?> {
         val result = ArrayList<TreeNode?>()
-
-        val queue = mutableListOf<BinarySearchTreeImpl<Int>>()
-        queue.add(root!!)
-        var index = 0
-
-        while (index < queue.size) {
-            val node = queue[index]
-            index++
-            //Primer elemento(raiz)
-            if(result.isEmpty()){
+        if (root == null) {
+            return result
+        }
+        val queue = LinkedList<BinarySearchTreeImpl<Int>>()
+        queue.offer(root)
+        while (!queue.isEmpty()) {
+            val node = queue.poll()
+            if(node == null || node.getRootValue() == null){
+                result.add(null)
+            }else{
                 result.add(TreeNode(node.getRootValue()))
             }
 
-            //Nodo completamente nulo
-            if(node.getRoot() == null && node.getLeftChild()?.getRoot() == null && node.getRightChild().getRoot() == null){
-                continue
+            if (node != null && node.getRootValue() != null) {
+                queue.offer(node.getLeftChild())
+                queue.offer(node.getRightChild())
+            } else {
+                queue.offer(null)
+                queue.offer(null)
             }
 
-            if (node.getLeftChild()?.getRoot() != null) {
-                //Hijo izquierdo
-                queue.add(node.getLeftChild()!!)
-                result.add(TreeNode(node.getLeftChild()!!.getRootValue()))
-            } else {
-                result.add(null)
-            }
-
-            if (node.getRightChild().getRoot() != null) {
-                //Hijo derecho
-                queue.add(node.getRightChild())
-                result.add(TreeNode(node.getRightChild().getRootValue()))
-            } else {
-                result.add(null)
+            if(queue.all{it == null}){
+                break
             }
         }
-
         return result
     }
+
+
+
+
 }

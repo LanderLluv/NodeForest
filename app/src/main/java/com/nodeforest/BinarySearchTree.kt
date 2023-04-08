@@ -77,7 +77,7 @@ interface BinarySearchTree<T : Comparable<T>> {
      * @return el subárbol del hijo derecho.
      * @throws EmptyTreeException si el árbol es vacío.
      */
-    fun getRightChild(): BinarySearchTree<T>
+    fun getRightChild(): BinarySearchTreeImpl<T>?
 
     /**
      * Elimina el valor y los árboles hijos del árbol actual, convirtiéndolo en un
