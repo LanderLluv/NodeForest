@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="125px"
         app:lineThickness="1dp"
-        app:levelSeparation="12dp"/>
+        app:levelSeparation="9dp"/>
 
     <Button
         android:id="@+id/btnAdd"
