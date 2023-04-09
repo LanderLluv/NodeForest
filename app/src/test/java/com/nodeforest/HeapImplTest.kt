@@ -50,9 +50,17 @@ class HeapImplTest {
         assertEquals(true, heap.isEmpty())
     }
 
+    //El valor insertado se debe colocar como raiz
     @Test
-    fun insert(){
+    fun insertRoot(){
         heap.insert(11)
         assertEquals(11, heap.getMaxValue())
+    }
+
+    //El valor insertado no se debe colocar como raiz
+    @Test
+    fun insertNotRoot(){
+        heap.insert(1)
+        assertEquals(7, heap.removeMaxValue())
     }
 }

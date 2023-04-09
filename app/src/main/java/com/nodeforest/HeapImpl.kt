@@ -41,6 +41,9 @@ class HeapImpl<T: Comparable<T>> : Heap<T> {
         }
     }
 
+    /*
+    Dado un indice, elige el mejor candidato para esa posicion
+     */
     private fun checkDown(index: Int){
         var parent = index
         var candidate = Int.MAX_VALUE
@@ -78,6 +81,9 @@ class HeapImpl<T: Comparable<T>> : Heap<T> {
 
     }
 
+    /*
+    Dado un indice, comprueba el valor del padre y lo sube en caso de ser mayor
+     */
     private fun checkUp(index: Int){
         var child = index
         var parent = (child-1)/2

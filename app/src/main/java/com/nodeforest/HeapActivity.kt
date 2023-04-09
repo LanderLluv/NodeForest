@@ -51,7 +51,7 @@ class HeapActivity : AppCompatActivity() {
 
     /*
         Se llama cuando se pulsa el boton de añadir.
-        Muestra un dialogo para poder introducir un valor al arbol, que se añadira en caso de ser
+        Muestra un dialogo para poder introducir un valor al heap, que se añadira en caso de ser
         un valor valido (0-99), o se rechazara en caso de no serlo.
      */
     private fun addValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
@@ -84,8 +84,7 @@ class HeapActivity : AppCompatActivity() {
 
     /*
         Se llama cuando se pulsa el boton de eliminar.
-        Muestra un dialogo para poder introducir un valor al arbol, que se borrara en caso de ser
-        un valor valido (0-99) y estar presente en el arbol, o se rechazara en caso de no serlo.
+        Elimina el valor raiz del heap.
      */
     private fun deleteValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
         heap.removeMaxValue()
@@ -127,7 +126,7 @@ class HeapActivity : AppCompatActivity() {
     }
 
     /*
-        Transforma un arbol en un array para poder representarlo graficamente
+        Transforma el array del heap en un array de TreeNode
      */
     private fun arrayToTreeArray(array: ArrayList<Int?>): ArrayList<TreeNode?> {
         val result = ArrayList<TreeNode?>()
