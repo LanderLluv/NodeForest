@@ -69,7 +69,7 @@ class BinarySearchTreeImplTest {
         val empty = BinarySearchTreeImpl<Int>()
         empty.insert(3)
         empty.insert(4)
-        assertEquals(4,empty.getRightChild().getRootValue())
+        assertEquals(4,empty.getRightChild()!!.getRootValue())
     }
 
     @Test
@@ -77,7 +77,7 @@ class BinarySearchTreeImplTest {
         val empty = BinarySearchTreeImpl<Int>()
         empty.insert(3)
         empty.insert(3)
-        assertEquals(3,empty.getRightChild().getRootValue())
+        assertEquals(3,empty.getRightChild()!!.getRootValue())
 
     }
 
@@ -160,7 +160,7 @@ class BinarySearchTreeImplTest {
 
     @Test
     fun hasRightChildFalse() {
-        assertEquals(false, bst.getRightChild().hasRightChild())
+        assertEquals(false, bst.getRightChild()!!.hasRightChild())
     }
 
     /*
@@ -174,7 +174,7 @@ class BinarySearchTreeImplTest {
         bstRightChild.insert(7)
         bstRightChild.insert(6)
         bstRightChild.insert(8)
-        assertEquals(true, bst.getRightChild().isSameTree(bstRightChild))
+        assertEquals(true, bst.getRightChild()!!.isSameTree(bstRightChild))
     }
 
     /*
@@ -188,7 +188,7 @@ class BinarySearchTreeImplTest {
         bstRightChild.insert(6)
         bstRightChild.insert(8)
         bstRightChild.insert(7)
-        assertEquals(false, bst.getRightChild().isSameTree(bstRightChild))
+        assertEquals(false, bst.getRightChild()!!.isSameTree(bstRightChild))
     }
 
     @Test
