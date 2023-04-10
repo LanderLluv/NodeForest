@@ -15,6 +15,7 @@ import de.blox.treeview.TreeView
 import kotlin.math.log2
 import kotlin.math.pow
 
+//ToDo: deshabilitar boton eliminar en caso de que el heap este vacio
 class HeapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +39,17 @@ class HeapActivity : AppCompatActivity() {
 
         val heap = HeapImpl<Int>()
 
-        val btnAdd: Button = findViewById(R.id.btnAdd)
-        btnAdd.setOnClickListener{
-            addValue(heap, adapter)
+        val btnDelete: Button = findViewById(R.id.btnDelete)
+        btnDelete.isEnabled = false
+        btnDelete.setOnClickListener{
+            deleteValue(heap, adapter, btnDelete, treeView)
         }
 
-        val btnDelete: Button = findViewById(R.id.btnDelete)
-        btnDelete.setOnClickListener{
-            deleteValue(heap, adapter)
+        val btnAdd: Button = findViewById(R.id.btnAdd)
+        btnAdd.setOnClickListener{
+            addValue(heap, adapter, btnDelete, treeView)
         }
+
     }
 
     /*
@@ -54,7 +57,8 @@ class HeapActivity : AppCompatActivity() {
         Muestra un dialogo para poder introducir un valor al heap, que se añadira en caso de ser
         un valor valido (0-99), o se rechazara en caso de no serlo.
      */
-    private fun addValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
+    private fun addValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
+                         btnDelete: Button, treeView: TreeView) {
         val addDialog = AlertDialog.Builder(this)
         addDialog.setTitle("Añade un elemento:")
         addDialog.setMessage("Elemento a añadir:")
@@ -69,7 +73,8 @@ class HeapActivity : AppCompatActivity() {
                     if(inputNumberValue in 0..99){
                         heap.insert(inputNumberValue)
                         val treeArray = arrayToTreeArray(heap.getArray())
-                        showTree(treeArray,adapter)
+                        showTree(treeArray,adapter, treeView)
+                        btnDelete.isEnabled = true
                     }else{
                         Toast.makeText(this, "El valor debe estar entre 0 y 99", Toast.LENGTH_SHORT).show()
                     }
@@ -86,42 +91,52 @@ class HeapActivity : AppCompatActivity() {
         Se llama cuando se pulsa el boton de eliminar.
         Elimina el valor raiz del heap.
      */
-    private fun deleteValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>) {
+    private fun deleteValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
+                            btnDelete: Button, treeView: TreeView) {
         heap.removeMaxValue()
         val treeArray = arrayToTreeArray(heap.getArray())
         if(treeArray.size > 0) {
-            showTree(treeArray, adapter)
+            showTree(treeArray, adapter, treeView)
+        }else{
+            showTree(null, adapter, treeView)
+            btnDelete.isEnabled = false
         }
     }
 
     /*
         Representa el arbol correspondiente dado un array
      */
-    private fun showTree(result: ArrayList<TreeNode?>, adapter: BaseTreeAdapter<ViewHolder?>){
-        adapter.setRootNode(result[0]!!)
-        var index = 0
-        while(index < result.size/2){
-            if(result[2*index+1] == null && result[2*index+2] == null){
+    private fun showTree(result: ArrayList<TreeNode?>?, adapter: BaseTreeAdapter<ViewHolder?>,
+                         treeView: TreeView){
+        if(result != null) {
+            treeView.visibility = View.VISIBLE
+            adapter.setRootNode(result[0]!!)
+            var index = 0
+            while (index < result.size / 2) {
+                if (result[2 * index + 1] == null && result[2 * index + 2] == null) {
+                    index++
+                    continue
+                }
+
+                //Hijo izquierdo
+                if (result[2 * index + 1] != null) {
+                    result[index]!!.addChild(result[2 * index + 1])
+                } else {
+                    //Nulo
+                    result[index]!!.addChild(TreeNode("N"))
+                }
+
+                //Hijo derecho
+                if (result[2 * index + 2] != null) {
+                    result[index]!!.addChild(result[2 * index + 2])
+                } else {
+                    //Nulo
+                    result[index]!!.addChild(TreeNode("N"))
+                }
                 index++
-                continue
             }
-
-            //Hijo izquierdo
-            if(result[2*index+1] != null){
-                result[index]!!.addChild(result[2*index+1])
-            }else{
-                //Nulo
-                result[index]!!.addChild(TreeNode("N"))
-            }
-
-            //Hijo derecho
-            if(result[2*index+2] != null){
-                result[index]!!.addChild(result[2*index+2])
-            }else{
-                //Nulo
-                result[index]!!.addChild(TreeNode("N"))
-            }
-            index++
+        }else{
+            treeView.visibility = View.INVISIBLE
         }
     }
 
