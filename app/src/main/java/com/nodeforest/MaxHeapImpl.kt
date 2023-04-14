@@ -2,7 +2,7 @@ package com.nodeforest
 
 import java.util.Collections
 
-class HeapImpl<T: Comparable<T>> : Heap<T> {
+class MaxHeapImpl<T: Comparable<T>> : MaxHeap<T> {
 
     private var size: Int
     private var array: ArrayList<T?>

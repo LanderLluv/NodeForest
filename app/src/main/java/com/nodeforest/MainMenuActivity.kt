@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
+//ToDo: añadir boton con ? para dar info mientras se mantenga pulsado
 class MainMenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +17,9 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, BinarySearchTreeActivity::class.java))
         }
 
-        val btnHeap: Button = findViewById(R.id.btnHeap)
+        val btnHeap: Button = findViewById(R.id.btnMaxHeap)
         btnHeap.setOnClickListener{
-            startActivity(Intent(this, HeapActivity::class.java))
+            startActivity(Intent(this, MaxHeapActivity::class.java))
         }
     }
 }

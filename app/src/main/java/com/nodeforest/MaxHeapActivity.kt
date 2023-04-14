@@ -15,11 +15,10 @@ import de.blox.treeview.TreeView
 import kotlin.math.log2
 import kotlin.math.pow
 
-//ToDo: deshabilitar boton eliminar en caso de que el heap este vacio
-class HeapActivity : AppCompatActivity() {
+class MaxHeapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_heap)
+        setContentView(R.layout.activity_maxheap)
 
         val treeView = findViewById<TreeView>(R.id.idTreeViewMain)
 
@@ -37,7 +36,7 @@ class HeapActivity : AppCompatActivity() {
         //Enlazamos el adaptador con el treeview
         treeView.setAdapter(adapter)
 
-        val heap = HeapImpl<Int>()
+        val heap = MaxHeapImpl<Int>()
 
         val btnDelete: Button = findViewById(R.id.btnDelete)
         btnDelete.isEnabled = false
@@ -57,7 +56,7 @@ class HeapActivity : AppCompatActivity() {
         Muestra un dialogo para poder introducir un valor al heap, que se añadira en caso de ser
         un valor valido (0-99), o se rechazara en caso de no serlo.
      */
-    private fun addValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
+    private fun addValue(heap: MaxHeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
                          btnDelete: Button, treeView: TreeView) {
         val addDialog = AlertDialog.Builder(this)
         addDialog.setTitle("Añade un elemento:")
@@ -91,7 +90,7 @@ class HeapActivity : AppCompatActivity() {
         Se llama cuando se pulsa el boton de eliminar.
         Elimina el valor raiz del heap.
      */
-    private fun deleteValue(heap: HeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
+    private fun deleteValue(heap: MaxHeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
                             btnDelete: Button, treeView: TreeView) {
         heap.removeMaxValue()
         val treeArray = arrayToTreeArray(heap.getArray())

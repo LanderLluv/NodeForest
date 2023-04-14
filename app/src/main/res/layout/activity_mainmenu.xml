@@ -42,10 +42,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnHeap"
+        android:id="@+id/btnMaxHeap"
         android:layout_width="225dp"
         android:layout_height="55dp"
-        android:text="Heap"
+        android:text="MaxHeap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.338"

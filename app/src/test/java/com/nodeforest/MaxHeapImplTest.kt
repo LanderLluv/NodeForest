@@ -5,9 +5,9 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class HeapImplTest {
+class MaxHeapImplTest {
 
-    private lateinit var heap: HeapImpl<Int>
+    private lateinit var heap: MaxHeapImpl<Int>
 
     /*
         7
@@ -16,7 +16,7 @@ class HeapImplTest {
      */
     @Before
     fun setUp() {
-        heap = HeapImpl<Int>()
+        heap = MaxHeapImpl<Int>()
         heap.insert(5)
         heap.insert(3)
         heap.insert(7)
@@ -24,7 +24,7 @@ class HeapImplTest {
 
     @Test
     fun isEmptyTrue(){
-        val heapEmpty = HeapImpl<Int>()
+        val heapEmpty = MaxHeapImpl<Int>()
         assertEquals(true, heapEmpty.isEmpty())
     }
 
@@ -35,7 +35,7 @@ class HeapImplTest {
 
     @Test
     fun removeMaxValueNull(){
-        val heapEmpty = HeapImpl<Int>()
+        val heapEmpty = MaxHeapImpl<Int>()
         assertEquals(null, heapEmpty.removeMaxValue())
     }
 

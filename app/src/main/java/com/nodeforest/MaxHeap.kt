@@ -15,7 +15,7 @@ package com.nodeforest
  * @param <T> tipo de los valores contenidos en el montículo binario.
  */
 
-interface Heap <T : Comparable<T>>  {
+interface MaxHeap <T : Comparable<T>>  {
 
     /**
      * Comprueba si el heap está vacío.

@@ -25,7 +25,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".HeapActivity"
+            android:name=".MaxHeapActivity"
             android:exported="true">
         </activity>
     </application>
