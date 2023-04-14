@@ -17,9 +17,14 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, BinarySearchTreeActivity::class.java))
         }
 
-        val btnHeap: Button = findViewById(R.id.btnMaxHeap)
-        btnHeap.setOnClickListener{
+        val btnMaxHeap: Button = findViewById(R.id.btnMaxHeap)
+        btnMaxHeap.setOnClickListener{
             startActivity(Intent(this, MaxHeapActivity::class.java))
+        }
+
+        val btnMinHeap: Button = findViewById(R.id.btnMinHeap)
+        btnMinHeap.setOnClickListener{
+            startActivity(Intent(this, MinHeapActivity::class.java))
         }
     }
 }
