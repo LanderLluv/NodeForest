@@ -1,4 +1,4 @@
-package com.nodeforest
+package com.nodeforest.impl
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -9,21 +9,25 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.nodeforest.activity.MaxHeapImpl
+import com.nodeforest.R
 import de.blox.treeview.BaseTreeAdapter
 import de.blox.treeview.TreeNode
 import de.blox.treeview.TreeView
 import kotlin.math.log2
 import kotlin.math.pow
 
-class MinHeapActivity : AppCompatActivity() {
+class MaxHeapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_minheap)
+        setContentView(R.layout.activity_maxheap)
 
         val treeView = findViewById<TreeView>(R.id.idTreeViewMain)
 
         //Adaptador necesario para el treeview
-        val adapter: BaseTreeAdapter<ViewHolder?> = object : BaseTreeAdapter<ViewHolder?>(this, R.layout.tree_view_node) {
+        val adapter: BaseTreeAdapter<ViewHolder?> = object : BaseTreeAdapter<ViewHolder?>(this,
+            R.layout.tree_view_node
+        ) {
             override fun onCreateViewHolder(view: View?): ViewHolder {
                 return ViewHolder(view)
             }
@@ -36,7 +40,7 @@ class MinHeapActivity : AppCompatActivity() {
         //Enlazamos el adaptador con el treeview
         treeView.setAdapter(adapter)
 
-        val heap = MinHeapImpl<Int>()
+        val heap = MaxHeapImpl<Int>()
 
         val btnDelete: Button = findViewById(R.id.btnDelete)
         btnDelete.isEnabled = false
@@ -56,7 +60,7 @@ class MinHeapActivity : AppCompatActivity() {
         Muestra un dialogo para poder introducir un valor al heap, que se añadira en caso de ser
         un valor valido (0-99), o se rechazara en caso de no serlo.
      */
-    private fun addValue(heap: MinHeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
+    private fun addValue(heap: MaxHeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
                          btnDelete: Button, treeView: TreeView) {
         val addDialog = AlertDialog.Builder(this)
         addDialog.setTitle("Añade un elemento:")
@@ -68,19 +72,19 @@ class MinHeapActivity : AppCompatActivity() {
 
         addDialog.setPositiveButton("Ok", DialogInterface.OnClickListener(){
                 dialog, i ->
-            val inputNumberValue = Integer.parseInt(inputNumber.text.toString())
-            if(inputNumberValue in 0..99){
-                heap.insert(inputNumberValue)
-                val treeArray = arrayToTreeArray(heap.getArray())
-                showTree(treeArray,adapter, treeView)
-                btnDelete.isEnabled = true
-            }else{
-                Toast.makeText(this, "El valor debe estar entre 0 y 99", Toast.LENGTH_SHORT).show()
-            }
+                    val inputNumberValue = Integer.parseInt(inputNumber.text.toString())
+                    if(inputNumberValue in 0..99){
+                        heap.insert(inputNumberValue)
+                        val treeArray = arrayToTreeArray(heap.getArray())
+                        showTree(treeArray,adapter, treeView)
+                        btnDelete.isEnabled = true
+                    }else{
+                        Toast.makeText(this, "El valor debe estar entre 0 y 99", Toast.LENGTH_SHORT).show()
+                    }
 
         })
         addDialog.setNegativeButton("Cancelar", DialogInterface.OnClickListener(){
-                dialog, i ->
+            dialog, i ->
         })
         addDialog.create()
         addDialog.show()
@@ -90,9 +94,9 @@ class MinHeapActivity : AppCompatActivity() {
         Se llama cuando se pulsa el boton de eliminar.
         Elimina el valor raiz del heap.
      */
-    private fun deleteValue(heap: MinHeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
+    private fun deleteValue(heap: MaxHeapImpl<Int>, adapter: BaseTreeAdapter<ViewHolder?>,
                             btnDelete: Button, treeView: TreeView) {
-        heap.removeMinValue()
+        heap.removeMaxValue()
         val treeArray = arrayToTreeArray(heap.getArray())
         if(treeArray.size > 0) {
             showTree(treeArray, adapter, treeView)

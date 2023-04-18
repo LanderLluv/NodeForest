@@ -1,8 +1,9 @@
-package com.nodeforest
+package com.nodeforest.impl
 
 
 import android.view.View
 import android.widget.TextView
+import com.nodeforest.R
 
 /*
     Clase necesaria para poder utilizar los nodos en las vistas

@@ -12,7 +12,7 @@
         android:theme="@style/Theme.NodeForest"
         tools:targetApi="31">
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".impl.MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,15 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BinarySearchTreeActivity"
+            android:name=".impl.BinarySearchTreeActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".MaxHeapActivity"
+            android:name=".impl.MaxHeapActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".MinHeapActivity"
+            android:name=".impl.MinHeapActivity"
             android:exported="true">
         </activity>
     </application>

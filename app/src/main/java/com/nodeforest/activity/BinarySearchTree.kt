@@ -1,9 +1,8 @@
-package com.nodeforest
+package com.nodeforest.activity
 
 /**
  * TAD árbol binario de búsqueda.
  *
- * TODO: Completar descripción
  *
  * No soporta el almacenamiento de valores nulos (<code>null</code>).
  *

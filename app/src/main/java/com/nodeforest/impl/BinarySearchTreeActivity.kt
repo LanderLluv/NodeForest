@@ -1,4 +1,4 @@
-package com.nodeforest
+package com.nodeforest.impl
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.nodeforest.activity.BinarySearchTreeImpl
+import com.nodeforest.R
 import de.blox.treeview.BaseTreeAdapter
 import de.blox.treeview.TreeNode
 import de.blox.treeview.TreeView
@@ -24,7 +26,9 @@ class BinarySearchTreeActivity : AppCompatActivity() {
         val treeView = findViewById<TreeView>(R.id.idTreeViewMain)
 
         //Adaptador necesario para el treeview
-        val adapter: BaseTreeAdapter<ViewHolder?> = object : BaseTreeAdapter<ViewHolder?>(this, R.layout.tree_view_node) {
+        val adapter: BaseTreeAdapter<ViewHolder?> = object : BaseTreeAdapter<ViewHolder?>(this,
+            R.layout.tree_view_node
+        ) {
             override fun onCreateViewHolder(view: View?): ViewHolder {
                 return ViewHolder(view)
             }
@@ -133,8 +137,8 @@ class BinarySearchTreeActivity : AppCompatActivity() {
     /*
         Representa el arbol correspondiente dado un array
      */
-    private fun showTree(result: ArrayList<TreeNode?>?,adapter: BaseTreeAdapter<ViewHolder?>,
-                        treeView: TreeView){
+    private fun showTree(result: ArrayList<TreeNode?>?, adapter: BaseTreeAdapter<ViewHolder?>,
+                         treeView: TreeView){
         if(result != null) {
             treeView.visibility = View.VISIBLE
             adapter.setRootNode(result[0]!!)

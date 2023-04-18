@@ -1,9 +1,10 @@
-package com.nodeforest
+package com.nodeforest.impl
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.nodeforest.R
 
 //ToDo: añadir boton con ? para dar info mientras se mantenga pulsado
 class MainMenuActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.nodeforest
+package com.nodeforest.activity
 
 /**
  * TAD Montículo binario.
@@ -7,7 +7,7 @@ package com.nodeforest
  *  1. Es completo, es decir, es un árbol completamente lleno, con la excepción
  *  del nivel inferior, que debe llenarse de izquierda a derecha.
  *  2. Las hojas están en dos niveles adyacentes.
- *  3. Para cada nodo X con padre P, se cumple que el dato en P es menor o igual
+ *  3. Para cada nodo X con padre P, se cumple que el dato en P es mayor o igual
  * que el dato en X
  *
  * No soporta el almacenamiento de valores nulos (<code>null</code>).
@@ -15,7 +15,7 @@ package com.nodeforest
  * @param <T> tipo de los valores contenidos en el montículo binario.
  */
 
-interface MinHeap <T : Comparable<T>>  {
+interface MaxHeap <T : Comparable<T>>  {
 
     /**
      * Comprueba si el heap está vacío.
@@ -30,14 +30,14 @@ interface MinHeap <T : Comparable<T>>  {
      *
      * @return el elemento mayor del heap.
      */
-    fun getMinValue(): T?
+    fun getMaxValue(): T?
 
     /**
      * Elimina y devuelve el elemento mayor del heap.
      *
      * @return el elemento mayor del heap.
      */
-    fun removeMinValue(): T?
+    fun removeMaxValue(): T?
 
     /**
      * Añade un valor al heap.

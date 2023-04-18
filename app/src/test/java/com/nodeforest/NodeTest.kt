@@ -1,5 +1,6 @@
 package com.nodeforest
 
+import com.nodeforest.activity.Node
 import org.junit.Assert.*
 
 import org.junit.Test
