@@ -2,12 +2,17 @@ package com.nodeforest.impl
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.nodeforest.R
 
 //ToDo: añadir boton con ? para dar info mientras se mantenga pulsado
-class MainMenuActivity : AppCompatActivity() {
+class MainMenuActivity : AppCompatActivity(), View.OnLongClickListener, View.OnTouchListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,5 +32,57 @@ class MainMenuActivity : AppCompatActivity() {
         btnMinHeap.setOnClickListener{
             startActivity(Intent(this, MinHeapActivity::class.java))
         }
+
+        val btnInfoBSTree: Button = findViewById(R.id.btnInfoBSTree)
+        val btnInfoMaxHeap: Button = findViewById(R.id.btnInfoMaxHeap)
+        val btnInfoMinHeap: Button = findViewById(R.id.btnInfoMinHeap)
+
+        //Detecta pulsacion larga
+        btnInfoBSTree.setOnLongClickListener(this)
+        btnInfoMaxHeap.setOnLongClickListener(this)
+        btnInfoMinHeap.setOnLongClickListener(this)
+
+        //Detecta fin de pulsacion
+        btnInfoBSTree.setOnTouchListener(this)
+        btnInfoMaxHeap.setOnTouchListener(this)
+        btnInfoMinHeap.setOnTouchListener(this)
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        when(v!!.id){
+            R.id.btnInfoBSTree -> setInfoText("btnInfoBSTree")
+            R.id.btnInfoMaxHeap -> setInfoText("btnInfoMaxHeap")
+            R.id.btnInfoMinHeap -> setInfoText("btnInfoMinHeap")
+        }
+
+        return false
+    }
+
+    private fun setInfoText(text: String){
+        var tvInfo: TextView = findViewById(R.id.tvInfo)
+        tvInfo.text = text
+        tvInfo.visibility = VISIBLE
+        var btnInfoBSTree: Button = findViewById(R.id.btnInfoBSTree)
+        var btnInfoMaxHeap: Button = findViewById(R.id.btnInfoMaxHeap)
+        var btnInfoMinHeap: Button = findViewById(R.id.btnInfoMinHeap)
+        btnInfoBSTree.visibility = INVISIBLE
+        btnInfoMaxHeap.visibility = INVISIBLE
+        btnInfoMinHeap.visibility = INVISIBLE
+    }
+
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if(event!!.action == MotionEvent.ACTION_UP){
+            var tvInfo: TextView = findViewById(R.id.tvInfo)
+            tvInfo.visibility = INVISIBLE
+            var btnInfoBSTree: Button = findViewById(R.id.btnInfoBSTree)
+            var btnInfoMaxHeap: Button = findViewById(R.id.btnInfoMaxHeap)
+            var btnInfoMinHeap: Button = findViewById(R.id.btnInfoMinHeap)
+            btnInfoBSTree.visibility = VISIBLE
+            btnInfoMaxHeap.visibility = VISIBLE
+            btnInfoMinHeap.visibility = VISIBLE
+            return true
+        }
+
+        return false
     }
 }
