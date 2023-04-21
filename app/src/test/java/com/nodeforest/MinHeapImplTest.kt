@@ -1,6 +1,6 @@
 package com.nodeforest
 
-import com.nodeforest.activity.MinHeapImpl
+import com.nodeforest.impl.MinHeapImpl
 import org.junit.Assert.*
 
 import org.junit.Before

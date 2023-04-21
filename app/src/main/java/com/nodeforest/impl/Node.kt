@@ -1,4 +1,4 @@
-package com.nodeforest.activity
+package com.nodeforest.impl
 
 class Node<T : Comparable<T>>(_value: T, _leftChild: Node<T>?, _rightChild: Node<T>?) {
 

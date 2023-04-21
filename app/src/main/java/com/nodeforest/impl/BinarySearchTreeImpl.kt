@@ -1,4 +1,4 @@
-package com.nodeforest.activity
+package com.nodeforest.impl
 
 class BinarySearchTreeImpl<T: Comparable<T>> : BinarySearchTree<T> {
     private var root: Node<T>?

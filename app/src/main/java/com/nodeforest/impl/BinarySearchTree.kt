@@ -1,4 +1,4 @@
-package com.nodeforest.activity
+package com.nodeforest.impl
 
 /**
  * TAD árbol binario de búsqueda.

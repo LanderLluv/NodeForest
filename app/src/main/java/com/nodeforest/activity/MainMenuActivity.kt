@@ -1,4 +1,4 @@
-package com.nodeforest.impl
+package com.nodeforest.activity
 
 import android.content.Intent
 import android.os.Bundle

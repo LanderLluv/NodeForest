@@ -1,6 +1,6 @@
 package com.nodeforest
 
-import com.nodeforest.activity.BinarySearchTreeImpl
+import com.nodeforest.impl.BinarySearchTreeImpl
 import org.junit.Assert.*
 
 import org.junit.Before

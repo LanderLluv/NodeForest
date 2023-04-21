@@ -1,6 +1,6 @@
 package com.nodeforest
 
-import com.nodeforest.activity.MaxHeapImpl
+import com.nodeforest.impl.MaxHeapImpl
 import org.junit.Assert.*
 
 import org.junit.Before
