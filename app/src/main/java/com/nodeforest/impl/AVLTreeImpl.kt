@@ -2,7 +2,7 @@ package com.nodeforest.impl
 
 import java.lang.Integer.max
 
-class AVLTreeImpl<T : Comparable<T>> {
+class AVLTreeImpl<T : Comparable<T>> : AVLTree<T>{
 
     private var root: AVLNode<T>?
 
@@ -10,7 +10,11 @@ class AVLTreeImpl<T : Comparable<T>> {
         root = null
     }
 
-    fun insert(value: T) {
+    fun getRoot(): AVLNode<T>? {
+        return root
+    }
+
+    override fun insert(value: T) {
         root = insertNode(root, value)
     }
 
@@ -50,7 +54,7 @@ class AVLTreeImpl<T : Comparable<T>> {
         return node
     }
 
-    fun delete(value: T) {
+    override fun delete(value: T) {
         root = deleteNode(root, value)
     }
 
