@@ -1,14 +1,14 @@
 package com.nodeforest.impl
 
-class AVLNode<T : Comparable<T>>(_value: T) {
+class AVLNode<T : Comparable<T>>(_value: T, _leftChild: AVLNode<T>?, _rightChild: AVLNode<T>?) {
     private var value: T
     private var leftChild: AVLNode<T>?
     private var rightChild: AVLNode<T>?
     private var height: Int
     init{
         value = _value
-        leftChild = null
-        rightChild = null
+        leftChild = _leftChild
+        rightChild = _rightChild
         height = 1
     }
 

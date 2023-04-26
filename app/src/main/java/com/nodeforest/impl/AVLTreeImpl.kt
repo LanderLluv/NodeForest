@@ -14,13 +14,35 @@ class AVLTreeImpl<T : Comparable<T>> : AVLTree<T>{
         return root
     }
 
+    override fun contains(value: T): Boolean{
+        var aux: AVLNode<T>? = root
+        while(aux != null){
+            if(aux.getValue() == value){
+                return true
+            }else if(aux.getLeftChild() == null && aux.getRightChild() == null) {
+                //Hemos llegado a la hoja
+                return false
+            }else if(value.compareTo(aux.getValue()) == 1 && aux.getRightChild() != null){
+                //El valor es mayor y tenemos nodo a la derecha
+                aux = aux.getRightChild()
+            }else if(value.compareTo(aux.getValue()) == -1 && aux.getLeftChild() != null) {
+                //El valor es menor y tenemos nodo a la izquierda
+                aux = aux.getLeftChild()
+            }else{
+                //El valor es mayor y no hay nodo a la derecha o el valor es menor y no hay nodo a la izquierda
+                return false
+            }
+        }
+        return false
+    }
+
     override fun insert(value: T) {
         root = insertNode(root, value)
     }
 
     private fun insertNode(node: AVLNode<T>?, value: T): AVLNode<T>? {
         if (node == null) {
-            return AVLNode(value)
+            return AVLNode(value, null, null)
         }
 
         if (value < node.getValue()) {
@@ -153,6 +175,43 @@ class AVLTreeImpl<T : Comparable<T>> : AVLTree<T>{
         rightChild.setHeight(newHeightRight)
 
         return rightChild
+    }
+
+    override fun getLeftChild(): AVLTreeImpl<T>{
+        val leftChild = AVLTreeImpl<T>()
+        leftChild.root = getLeftChildNode(root)
+        return leftChild
+    }
+
+    private fun getLeftChildNode(node: AVLNode<T>?): AVLNode<T>?{
+        if(node == null || node.getLeftChild() == null){
+            return null
+        }
+        return AVLNode<T>(node.getLeftChild()!!.getValue(),
+            getLeftChildNode(node.getLeftChild()), getRightChildNode(node.getLeftChild()))
+    }
+
+    override fun getRightChild(): AVLTreeImpl<T>{
+        val rightChild = AVLTreeImpl<T>()
+        rightChild.root = getRightChildNode(root)
+        return rightChild
+    }
+
+    private fun getRightChildNode(node: AVLNode<T>?): AVLNode<T>?{
+        if(node == null || node.getRightChild() == null){
+            return null
+        }
+        return AVLNode<T>(node.getRightChild()!!.getValue(),
+            getLeftChildNode(node.getRightChild()), getRightChildNode(node.getRightChild()))
+
+    }
+
+    override fun clear(){
+        root = null
+    }
+
+    override fun isEmpty(): Boolean{
+        return root == null
     }
 
 }
