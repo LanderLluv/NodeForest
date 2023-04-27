@@ -26,9 +26,10 @@
         android:textSize="48px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintVertical_bias="0.181" />
 
     <Button
         android:id="@+id/btnBSTree"
@@ -58,12 +59,24 @@
         android:layout_width="225dp"
         android:layout_height="55dp"
         android:text="MinHeap"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnAVLTree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.311"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMaxHeap"
         app:layout_constraintVertical_bias="0.767" />
+
+    <Button
+        android:id="@+id/btnAVLTree"
+        android:layout_width="225dp"
+        android:layout_height="55dp"
+        android:text="AVLTree"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.311"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMinHeap"
+        app:layout_constraintVertical_bias="0.904" />
 
     <android.widget.Button
         android:id="@+id/btnInfoBSTree"
@@ -71,15 +84,15 @@
         android:layout_height="60dp"
         android:background="@drawable/yellowcircle"
         android:backgroundTint="@color/yellow"
-        android:text="\?"
         android:elevation="2dp"
+        android:text="\?"
         app:iconTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.467" />
+        app:layout_constraintVertical_bias="0.335" />
 
     <android.widget.Button
         android:id="@+id/btnInfoMinHeap"
@@ -87,15 +100,31 @@
         android:layout_height="60dp"
         android:background="@drawable/yellowcircle"
         android:backgroundTint="@color/yellow"
-        android:text="\?"
         android:elevation="2dp"
+        android:text="\?"
         app:iconTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.712" />
+
+    <android.widget.Button
+        android:id="@+id/btnInfoAVLTree"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/yellowcircle"
+        android:backgroundTint="@color/yellow"
+        android:elevation="2dp"
+        android:text="\?"
+        app:iconTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901" />
 
     <android.widget.Button
         android:id="@+id/btnInfoMaxHeap"
@@ -103,15 +132,15 @@
         android:layout_height="60dp"
         android:background="@drawable/yellowcircle"
         android:backgroundTint="@color/yellow"
-        android:text="\?"
         android:elevation="2dp"
+        android:text="\?"
         app:iconTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.667" />
+        app:layout_constraintVertical_bias="0.515" />
 
     <TextView
         android:id="@+id/tvInfo"
