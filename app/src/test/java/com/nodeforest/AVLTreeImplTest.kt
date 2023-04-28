@@ -42,29 +42,12 @@ class AVLTreeImplTest {
     }
 
     /*
-            50
-           / \
-          5   100
+          50
          / \
-        3  10
-     */
-    @Test
-    fun insertBalanceLeft(){
-        avltree.insert(3)
-        avltree.insert(5)
-        val leftChild = avltree.getRoot()!!.getLeftChild()
-        assertEquals(5, leftChild!!.getValue())
-        assertEquals(3, leftChild.getLeftChild()!!.getValue())
-        assertEquals(10, leftChild.getRightChild()!!.getValue())
-    }
-
-    /*
-           50
-          / \
-         5   100
-            /  \
-           75  125
-    */
+        5   100
+           /  \
+          75  125
+   */
     @Test
     fun insertNoBalanceRight(){
         avltree.insert(75)
@@ -74,46 +57,77 @@ class AVLTreeImplTest {
         assertEquals(75, rightChild.getLeftChild()!!.getValue())
         assertEquals(125, rightChild.getRightChild()!!.getValue())
     }
-    /*
-            50
-           / \
-          5   68
-             / \
-            55 100
-     */
+
     @Test
-    fun insertBalanceRight(){
-        avltree.insert(55)
-        avltree.insert(68)
-        val rightChild = avltree.getRoot()!!.getRightChild()
-        assertEquals(68, rightChild!!.getValue())
-        assertEquals(55, rightChild.getLeftChild()!!.getValue())
-        assertEquals(100, rightChild.getRightChild()!!.getValue())
+    fun insertBalanceLeftLeft(){
+        val newAVL = AVLTreeImpl<Int>()
+        newAVL.insert(70)
+        newAVL.insert(67)
+        newAVL.insert(86)
+        newAVL.insert(65)
+        newAVL.insert(69)
+        newAVL.insert(73)
+        newAVL.insert(93)
+        newAVL.insert(25)
+        newAVL.insert(66)
+        newAVL.insert(68)
+        //Desequilibrio izquieda izquierda
+        newAVL.insert(47)
+        assertEquals(67, newAVL.getRoot()!!.getValue())
+        assertEquals(65, newAVL.getLeftChild().getRoot()!!.getValue())
+        assertEquals(70, newAVL.getRightChild().getRoot()!!.getValue())
     }
 
-    /*
-            22
-           / \
-          10   50
-         / \    \
-        1   21  100
-     */
     @Test
-    fun insertBalanceRoot(){
-        avltree.insert(1)
-        avltree.insert(22)
-        //Produce desequilibrio
-        avltree.insert(21)
-
-        assertEquals(22, avltree.getRoot()!!.getValue())
-        assertEquals(10, avltree.getRoot()!!.getLeftChild()!!.getValue())
-        assertEquals(50, avltree.getRoot()!!.getRightChild()!!.getValue())
-        assertEquals(1, avltree.getRoot()!!.getLeftChild()!!.getLeftChild()!!.getValue())
-        assertEquals(21, avltree.getRoot()!!.getLeftChild()!!.getRightChild()!!.getValue())
-        assertEquals(100, avltree.getRoot()!!.getRightChild()!!.getRightChild()!!.getValue())
-
-
+    fun insertBalanceRightRight(){
+        val newAVL = AVLTreeImpl<Int>()
+        newAVL.insert(70)
+        newAVL.insert(67)
+        newAVL.insert(86)
+        newAVL.insert(65)
+        newAVL.insert(69)
+        newAVL.insert(93)
+        newAVL.insert(25)
+        newAVL.insert(66)
+        newAVL.insert(68)
+        //Desequilibrio derecha derecha
+        newAVL.insert(99)
+        val rightChild = newAVL.getRightChild()
+        assertEquals(93, rightChild.getRoot()!!.getValue())
+        assertEquals(86, rightChild.getLeftChild().getRoot()!!.getValue())
+        assertEquals(99, rightChild.getRightChild().getRoot()!!.getValue())
     }
+
+    @Test
+    fun insertBalanceLeftRight(){
+        val newAVL = AVLTreeImpl<Int>()
+        newAVL.insert(50)
+        newAVL.insert(23)
+        newAVL.insert(70)
+        newAVL.insert(10)
+        newAVL.insert(45)
+        //Desequilibrio izquierda derecha
+        newAVL.insert(30)
+        assertEquals(45, newAVL.getRoot()!!.getValue())
+        assertEquals(23, newAVL.getLeftChild().getRoot()!!.getValue())
+        assertEquals(50, newAVL.getRightChild().getRoot()!!.getValue())
+    }
+
+    @Test
+    fun insertBalanceRightLeft(){
+        val newAVL = AVLTreeImpl<Int>()
+        newAVL.insert(50)
+        newAVL.insert(23)
+        newAVL.insert(70)
+        newAVL.insert(65)
+        newAVL.insert(82)
+        //Desequilibrio izquierda derecha
+        newAVL.insert(68)
+        assertEquals(65, newAVL.getRoot()!!.getValue())
+        assertEquals(50, newAVL.getLeftChild().getRoot()!!.getValue())
+        assertEquals(70, newAVL.getRightChild().getRoot()!!.getValue())
+    }
+
 
     /*
             50
@@ -149,28 +163,26 @@ class AVLTreeImplTest {
         assertEquals(75, rightChild!!.getLeftChild()!!.getValue())
     }
 
-    /*
-            75
-           /  \
-          10  100
-         / \    \
-        1  25   125
-
-     */
     @Test
-    fun deleteRoot(){
-        avltree.insert(1)
-        avltree.insert(25)
-        avltree.insert(75)
-        avltree.insert(125)
-        avltree.delete(50)
-        assertEquals(75, avltree.getRoot()!!.getValue())
-        assertEquals(10, avltree.getRoot()!!.getLeftChild()!!.getValue())
-        assertEquals(100, avltree.getRoot()!!.getRightChild()!!.getValue())
-        assertEquals(1, avltree.getRoot()!!.getLeftChild()!!.getLeftChild()!!.getValue())
-        assertEquals(25, avltree.getRoot()!!.getLeftChild()!!.getRightChild()!!.getValue())
-        assertEquals(125, avltree.getRoot()!!.getRightChild()!!.getRightChild()!!.getValue())
+    fun deleteDoubleBalance(){
+        val newAVL = AVLTreeImpl<Int>()
+        newAVL.insert(80)
+        newAVL.insert(75)
+        newAVL.insert(86)
+        newAVL.insert(65)
+        newAVL.insert(79)
+        newAVL.insert(83)
+        newAVL.insert(93)
+        newAVL.insert(25)
+        newAVL.insert(68)
+        newAVL.insert(78)
+        newAVL.insert(90)
+        newAVL.insert(66)
+        newAVL.insert(70)
+        newAVL.delete(83)
+        assertEquals(75, newAVL.getRoot()!!.getValue())
+        assertEquals(65, newAVL.getLeftChild().getRoot()!!.getValue())
+        assertEquals(80, newAVL.getRightChild().getRoot()!!.getValue())
     }
 
-    //TODO: añadir mas test para desequilibrios
 }
