@@ -24,6 +24,36 @@ class AVLTreeImplTest {
 
     }
 
+    @Test
+    fun containsTrue(){
+        assertEquals(true, avltree.contains(10))
+    }
+
+    @Test
+    fun containsFalse(){
+        assertEquals(false, avltree.contains(11))
+    }
+
+    @Test
+    fun clear() {
+        val aux = avltree
+        aux.clear()
+        assertEquals(null, aux.getRoot()?.getValue())
+    }
+
+    @Test
+    fun isEmptyTrue() {
+        val empty = AVLTreeImpl<Int>()
+        assertEquals(true, empty.isEmpty())
+    }
+
+    @Test
+    fun isEmptyFalse() {
+        assertEquals(false, avltree.isEmpty())
+    }
+
+
+
     /*
             50
            / \
